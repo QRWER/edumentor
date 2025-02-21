@@ -2,6 +2,8 @@ package com.spring.edumentor.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "mentor")
 public class Mentor {
@@ -18,6 +20,10 @@ public class Mentor {
 
     @Column(name = "education")
     private String education;
+
+    @OneToMany(cascade = CascadeType.ALL) //возможно поменять тип каскада
+    @JoinColumn(name = "id_mentor")
+    private List<Homework> homeworks;
 
     public Mentor() {
     }
@@ -58,5 +64,15 @@ public class Mentor {
 
     public void setEducation(String education) {
         this.education = education;
+    }
+
+    @Override
+    public String toString() {
+        return "Mentor{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", subject='" + subject + '\'' +
+                ", education='" + education + '\'' +
+                '}';
     }
 }
